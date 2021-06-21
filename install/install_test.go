@@ -14,7 +14,7 @@ import (
 )
 
 func TestTaskInstallLintingTools(t *testing.T) {
-    var ctx context.Context = nil
+    var ctx context.Context
 
 	is := is.New(t)
 	flow := &goyek.Taskflow{}
