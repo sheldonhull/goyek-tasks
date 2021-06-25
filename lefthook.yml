@@ -13,7 +13,13 @@ pre-push:
       tags: security gotool
       name: gitleaks-scan
       run: gitleaks --pretty --exclude-forks --config=.gitleaks.toml --depth=1  -v
-
+    gopherbadge:
+      tags: docs tests
+      name: update gopherbadge
+      run: |
+        go test ./package-with-tests/ -coverprofile ./artifacts/cover.out
+        go tool cover -html=./artifacts/cover.out -o ./artifacts/coverage.html
+        gopherbadger -md="README.md,coverage.md"
 pre-commit:
   parallel: true
   tags: go lint

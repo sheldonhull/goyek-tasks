@@ -22,6 +22,6 @@ go mod tidy
 go test -v ./install/ -v
 ```
 
-## Usage <a name = "usage"></a>
+## Test Coverage
 
-Add notes about how to use the system.
+![gopherbadger-tag-do-not-edit]()
