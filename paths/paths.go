@@ -70,23 +70,23 @@ func TaskGetBuildRoot() goyek.Task {
 	}
 }
 
-// ResolveParentDirectory returns the directory above the provided directory as a fully qualified absolute path
-func resolveParentDirectory(tf *goyek.TF, childDirectory string) (parentDirectory string) {
-	projectDirectory := filepath.Join("../", childDirectory)
-	parentDirectory, err := filepath.Abs(projectDirectory)
-	if err != nil {
-		tf.Errorf("filepath.Abs(ProjectDirectory): [%v]", err)
-	}
-	tf.Logf("childDirectory [%s] --> parentDirectory: [%s]", childDirectory, parentDirectory)
-	return parentDirectory
-}
+// // ResolveParentDirectory returns the directory above the provided directory as a fully qualified absolute path
+// func resolveParentDirectory(tf *goyek.TF, childDirectory string) (parentDirectory string) {
+// 	projectDirectory := filepath.Join("../", childDirectory)
+// 	parentDirectory, err := filepath.Abs(projectDirectory)
+// 	if err != nil {
+// 		tf.Errorf("filepath.Abs(ProjectDirectory): [%v]", err)
+// 	}
+// 	tf.Logf("childDirectory [%s] --> parentDirectory: [%s]", childDirectory, parentDirectory)
+// 	return parentDirectory
+// }
 
-// resolveABSPath returns absolute path of any path, and logs error upon failure
-func resolveABSPath(tf *goyek.TF, directory string) (ABSPath string) {
-	ABSPath, err := filepath.Abs(directory)
-	if err != nil {
-		tf.Errorf("ABSPath: [%v]", err)
-	}
-	tf.Logf("directory [%s] --> ABSPath: [%s]", directory, ABSPath)
-	return ABSPath
-}
+// // resolveABSPath returns absolute path of any path, and logs error upon failure
+// func resolveABSPath(tf *goyek.TF, directory string) (ABSPath string) {
+// 	ABSPath, err := filepath.Abs(directory)
+// 	if err != nil {
+// 		tf.Errorf("ABSPath: [%v]", err)
+// 	}
+// 	tf.Logf("directory [%s] --> ABSPath: [%s]", directory, ABSPath)
+// 	return ABSPath
+// }
