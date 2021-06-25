@@ -14,12 +14,12 @@ import (
 )
 
 func TestTaskInstallLintingTools(t *testing.T) {
-    var ctx context.Context
+	var ctx context.Context
 
 	is := is.New(t)
 	flow := &goyek.Taskflow{}
 	_ = flow.Register(TaskInstallLintingTools())
 	// ctx := context.Context
-	response := flow.Run(ctx ,"install-linters")
+	response := flow.Run(ctx, "install-linters")
 	is.Equal(response, 0) // install-linters exits without error
 }

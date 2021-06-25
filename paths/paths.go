@@ -4,6 +4,7 @@
 package paths
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 
@@ -12,6 +13,42 @@ import (
 
 // BuildRoot reflects the directory above `build` which should be the project directory. This variable provides more predictable path handling once set for all subsequent tasks.
 var BuildRoot string
+
+// ArtifactDirectory for all the downloaded and generated artifacts
+var ArtifactDirectory string
+
+// ToolsDirectory is for binaries downloaded as part of CI work but not build from source in project
+var ToolsDirectory string
+
+// InitBuildPathVariables sets the global variables for build tooling and artifacts
+func InitBuildPathVariables() {
+	wd, err := os.Getwd()
+	if err != nil {
+		fmt.Printf("getwd: [%v]", err)
+	}
+	projectDirectory := filepath.Dir(wd)
+	parentDirectory, err := filepath.Abs(projectDirectory)
+	if err != nil {
+		fmt.Printf("filepath.Abs(ProjectDirectory): [%v]\n", err)
+	}
+	BuildRoot, err = filepath.Abs(parentDirectory)
+	if err != nil {
+		fmt.Printf("BuildRoot: [%v]", err)
+	}
+	BuildRoot, err = filepath.Abs(parentDirectory)
+	if err != nil {
+		fmt.Printf("BuildRoot: [%v]", err)
+	}
+
+	ArtifactDirectory, err = filepath.Abs(filepath.Join(parentDirectory, "artifacts"))
+	if err != nil {
+		fmt.Printf("ArtifactDirectory: [%v]", err)
+	}
+	ToolsDirectory, err = filepath.Abs(filepath.Join(parentDirectory, "tools"))
+	if err != nil {
+		fmt.Printf("ToolsDirectory: [%v]", err)
+	}
+}
 
 // TaskGetBuildRoot navigates up from `build` directory to ensure the path for the project is globally available for tasks with a simple call.
 func TaskGetBuildRoot() goyek.Task {

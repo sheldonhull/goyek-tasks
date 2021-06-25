@@ -3,12 +3,5 @@
 // This might include docker image pulls as well.
 package paths
 
-import (
-	// "context"
-	// "reflect"
-	"context"
-	"testing"
-
-	"github.com/goyek/goyek"
-	"github.com/matryer/is"
-)
+// "context"
+// "reflect"
