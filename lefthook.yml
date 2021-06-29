@@ -14,7 +14,7 @@ pre-push:
       name: gitleaks-scan
       run: gitleaks --pretty --exclude-forks --config=.gitleaks.toml --depth=1  -v
     gopherbadge:
-      tags: docs tests
+      tags: docs tests go
       name: update gopherbadge
       run: |
         go test ./package-with-tests/ -coverprofile ./artifacts/cover.out

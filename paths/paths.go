@@ -7,17 +7,18 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-
-	"github.com/goyek/goyek"
 )
 
 // BuildRoot reflects the directory above `build` which should be the project directory. This variable provides more predictable path handling once set for all subsequent tasks.
 var BuildRoot string
 
-// ArtifactDirectory for all the downloaded and generated artifacts
-var ArtifactDirectory string
+// ArtifactDirectory is the build output directory for all binaries and other files. This simplifies project management instead of having possible binaries in each directory go files are built from.
+var ArtifactDirectory = "artifacts"
 
-// ToolsDirectory is for binaries downloaded as part of CI work but not build from source in project
+// BuildDir is the current build directory for the goyek files
+var BuildDir = "build"
+
+// ToolsDirectory contains local CI binaries for tooling that shouldn't get committed in git
 var ToolsDirectory string
 
 // InitBuildPathVariables sets the global variables for build tooling and artifacts
@@ -31,15 +32,14 @@ func InitBuildPathVariables() {
 	if err != nil {
 		fmt.Printf("filepath.Abs(ProjectDirectory): [%v]\n", err)
 	}
-	BuildRoot, err = filepath.Abs(parentDirectory)
+	BuildRootRelative, err := os.Getwd()
+	if err != nil {
+		fmt.Printf("getwd(): [%v]\n", err)
+	}
+	BuildRoot, err = filepath.Abs(BuildRootRelative)
 	if err != nil {
 		fmt.Printf("BuildRoot: [%v]", err)
 	}
-	BuildRoot, err = filepath.Abs(parentDirectory)
-	if err != nil {
-		fmt.Printf("BuildRoot: [%v]", err)
-	}
-
 	ArtifactDirectory, err = filepath.Abs(filepath.Join(parentDirectory, "artifacts"))
 	if err != nil {
 		fmt.Printf("ArtifactDirectory: [%v]", err)
@@ -48,45 +48,11 @@ func InitBuildPathVariables() {
 	if err != nil {
 		fmt.Printf("ToolsDirectory: [%v]", err)
 	}
+	fmt.Printf(`=== VARIABLES ===
+variables
+
+BuildRoot         : [%s]
+ArtifactDirectory : [%s]
+ToolsDirectory    : [%s]
+`, BuildRoot, ArtifactDirectory, ToolsDirectory)
 }
-
-// TaskGetBuildRoot navigates up from `build` directory to ensure the path for the project is globally available for tasks with a simple call.
-func TaskGetBuildRoot() goyek.Task {
-	return goyek.Task{
-		Name: "get-build-root",
-		Command: func(tf *goyek.TF) {
-			wd, err := os.Getwd()
-			if err != nil {
-				tf.Errorf("getwd: [%v]", err)
-			}
-			// WITH HELPER: BuildRoot = resolveParentDirectory(wd)
-			projectDirectory := filepath.Join("../", wd)
-			BuildRoot, err := filepath.Abs(projectDirectory)
-			if err != nil {
-				tf.Errorf("filepath.Abs(ProjectDirectory): [%v]", err)
-			}
-			tf.Logf("BuildRoot: [%s]", BuildRoot)
-		},
-	}
-}
-
-// // ResolveParentDirectory returns the directory above the provided directory as a fully qualified absolute path
-// func resolveParentDirectory(tf *goyek.TF, childDirectory string) (parentDirectory string) {
-// 	projectDirectory := filepath.Join("../", childDirectory)
-// 	parentDirectory, err := filepath.Abs(projectDirectory)
-// 	if err != nil {
-// 		tf.Errorf("filepath.Abs(ProjectDirectory): [%v]", err)
-// 	}
-// 	tf.Logf("childDirectory [%s] --> parentDirectory: [%s]", childDirectory, parentDirectory)
-// 	return parentDirectory
-// }
-
-// // resolveABSPath returns absolute path of any path, and logs error upon failure
-// func resolveABSPath(tf *goyek.TF, directory string) (ABSPath string) {
-// 	ABSPath, err := filepath.Abs(directory)
-// 	if err != nil {
-// 		tf.Errorf("ABSPath: [%v]", err)
-// 	}
-// 	tf.Logf("directory [%s] --> ABSPath: [%s]", directory, ABSPath)
-// 	return ABSPath
-// }

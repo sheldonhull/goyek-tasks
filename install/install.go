@@ -4,17 +4,16 @@
 package install
 
 import (
-	"time"
-
 	"github.com/goyek/goyek"
 	// "github.com/pterm/pterm"
 )
 
+// TaskInstallLintingTools installs tooling for linting like golangci-lint and others
 func TaskInstallLintingTools() goyek.Task {
 	return goyek.Task{
 		Name:  "install-linters",
 		Usage: "Install various linting tools that pre-commit or other tooling will need",
-		Command: func(tf *goyek.TF) {
+		Action: func(tf *goyek.TF) {
 			goToolsRepos := []string{
 				"github.com/securego/gosec/v2/cmd/gosec@master",
 				"golang.org/x/tools/cmd/goimports@master",
@@ -43,7 +42,6 @@ func TaskInstallLintingTools() goyek.Task {
 					// pterm.Warning.Printf("Could not install [%s] per [%v]\n", i, err)
 					tf.Errorf("❗ Could not install [%s] per [%v]\n", i, err)
 				}
-				time.Sleep(time.Millisecond * 350)
 				// p.Increment()
 			}
 			tf.Log("✅ linters installed successfully\n")

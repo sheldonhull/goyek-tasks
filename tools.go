@@ -11,9 +11,9 @@ import (
 	_ "github.com/client9/misspell/cmd/misspell"
 	_ "github.com/evilmartians/lefthook"
 	_ "github.com/golangci/golangci-lint/cmd/golangci-lint"
+	_ "github.com/jpoles1/gopherbadger"
 	_ "github.com/quasilyte/go-ruleguard/dsl"
 	_ "github.com/securego/gosec/v2/cmd/gosec"
 	_ "github.com/zricethezav/gitleaks/v7"
 	_ "mvdan.cc/gofumpt"
-	_ "github.com/jpoles1/gopherbadger"
 )

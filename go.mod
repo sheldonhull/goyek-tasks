@@ -9,7 +9,7 @@ require (
 	github.com/fogleman/gg v1.3.0 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/golangci/golangci-lint v1.41.1
-	github.com/goyek/goyek v0.5.0
+	github.com/goyek/goyek v0.5.1-0.20210624071233-f4e4494f9477
 	github.com/jpoles1/gopherbadger v2.4.0+incompatible
 	github.com/matryer/is v1.4.0
 	github.com/mattn/go-isatty v0.0.13 // indirect

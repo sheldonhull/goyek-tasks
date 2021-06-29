@@ -5,3 +5,7 @@ package paths
 
 // "context"
 // "reflect"
+//func TestInitBuildPathVariables(t *testing.T) {
+//	is := is.New(t)
+//	t.Run(InitBuildPathVariables())
+//}
