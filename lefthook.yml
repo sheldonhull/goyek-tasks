@@ -17,7 +17,7 @@ pre-push:
       tags: docs tests go
       name: update gopherbadge
       run: |
-        go test ./package-with-tests/ -coverprofile ./artifacts/cover.out
+        go test ./... -coverprofile ./artifacts/cover.out
         go tool cover -html=./artifacts/cover.out -o ./artifacts/coverage.html
         gopherbadger -md="README.md,coverage.md"
 pre-commit:
