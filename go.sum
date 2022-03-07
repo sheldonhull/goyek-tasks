@@ -2,5 +2,7 @@ github.com/goyek/goyek v0.5.0 h1:/2MrI4oaGU1IQG0LdQMKD9qFezwKab3q/WGB53L83M8=
 github.com/goyek/goyek v0.5.0/go.mod h1:UGjZz3juJL2l2eMqRbxQYjG8ieyKb7WMYPv0KB0KVxA=
 github.com/goyek/goyek v0.6.0 h1:2YQ4V3X7q+zFF98IBWMc1WRwfzs0TQ8jrwOKY3XRQRk=
 github.com/goyek/goyek v0.6.0/go.mod h1:UGjZz3juJL2l2eMqRbxQYjG8ieyKb7WMYPv0KB0KVxA=
+github.com/goyek/goyek v0.6.3 h1:t0h3gWdlvGeSChltiyAyka9Mlcp3CEPDRssRf0XHDTM=
+github.com/goyek/goyek v0.6.3/go.mod h1:UGjZz3juJL2l2eMqRbxQYjG8ieyKb7WMYPv0KB0KVxA=
 github.com/matryer/is v1.4.0 h1:sosSmIWwkYITGrxZ25ULNDeKiMNzFSr4V/eqBQP0PeE=
 github.com/matryer/is v1.4.0/go.mod h1:8I/i5uYgLzgsgEloJE1U6xx5HkBQpAZvepWuujKwMRU=
